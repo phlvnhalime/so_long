@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../test_links"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stdbool.h": "c",
+			"mlx42.h": "c",
+			"so_long.h": "c"
+		}
+	}
+}
