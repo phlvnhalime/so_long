@@ -76,6 +76,7 @@ void	read_map(t_game *masters_of_war)
 		return ;
 	allocate_map(masters_of_war, tmp);
 	check_map(masters_of_war, tmp);
+	matrix_free(tmp);
 }
 
 void	return_maps(t_game *mow, char *str, char **map)

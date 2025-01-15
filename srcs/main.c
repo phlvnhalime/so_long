@@ -83,8 +83,13 @@ int	get_arguments(char *av[])
 	return (EXIT_SUCCESS);
 }
 
+// void	checkleak(void)
+// {
+// 	system("leaks so_long");
+// }
 int	main(int ac, char **av)
 {
+	// atexit(&checkleak);
 	if (ac != 2)
 	{
 		ft_putendl_fd("Usage: <executable_name> <maps.ber>", 2);
