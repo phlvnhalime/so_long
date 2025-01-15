@@ -12,41 +12,45 @@
 
 #include "../include/so_long.h"
 
-
-bool key_down(t_game *mow)
+bool	key_down(t_game *mow)
 {
-    int x;
-    int y;
+	int	x;
+	int	y;
 
-    x = mow->player->x_vector;
-    y = mow->player->y_vector;
-    if (move_down_map(mow, x, y + 1) == true)
-    {
-        mow->player->player_image->instances[0].y += 32;
-        if(mow->map[y][x] == 'E' && mow->collactable == 0)
-            mission_completed(mow);
-        if(mow->map[y][x] == 'C')
-        {
-            mow->collactable--;
-            mow->map[y][x] = '0';
-        }
-        mow->player->y_vector += 1;
-        mow->player->moves++;
-        ft_printf("Player is moving = %d\n", mow->player->moves);
-        // Tum hareketlerde bu ikisini ekle!
-        mlx_delete_image(mow->mlx, mow->player->player_image);
-        player(mow, x, y + 1);
-    }
-    return true;
+	x = mow->player->x_vector;
+	y = mow->player->y_vector;
+	if (move_down_map(mow, x, y + 1) == true)
+	{
+		mow->player->player_image->instances[0].y += 32;
+		moves(mow, x, y);
+		mow->player->y_vector += 1;
+		mow->player->moves++;
+		ft_printf("Player is moving = %d\n", mow->player->moves);
+		mlx_delete_image(mow->mlx, mow->player->player_image);
+		player(mow, x, y + 1);
+	}
+	return (true);
 }
 
-bool move_down_map(t_game *mow, int x, int y)
+bool	move_down_map(t_game *mow, int x, int y)
 {
-    if(mow->last_row == 0)
-        return false;
-    if(mow->map[y][x] == '1')
-        return false;
-    if(mow->map[y][x] == 'C')
-        background(mow, x, y);
-    return true;
+	ft_printf("Move DOWN: x=%d, y=%d, map[%d][%d]=%c\n", x, y, y, x,
+		mow->map[y][x]);
+	if (mow->last_row == y)
+	{
+		ft_printf("You can't go down!\n");
+		return (false);
+	}
+	if (mow->map[y][x] == '1')
+	{
+		ft_printf("Be CAREFULL!! Does this look like a path to you?\n");
+		return (false);
+	}
+	if (mow->map[y][x] == 'C')
+	{
+		ft_printf("The great reunion has happened! Eternity is near: %d\n",
+			mow->collactable);
+		background(mow, x, y);
+	}
+	return (true);
 }
